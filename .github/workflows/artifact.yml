@@ -24,6 +24,9 @@ jobs:
   verify-artifact:
     needs: create-artifact
     runs-on: ubuntu-latest
+    permissions:
+     id-token: write
+     contents: read
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4
