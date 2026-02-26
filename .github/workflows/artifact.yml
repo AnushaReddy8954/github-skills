@@ -36,7 +36,7 @@ jobs:
           echo "Here are all the files in the artifact:"
           ls -laR  
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@main 
+        uses: aws-actions/configure-aws-credentials@v4 
         with:
           role-to-assume: arn:aws:iam::116912494636:role/github-IAMRole-assume-policy
           aws-region: us-east-2
