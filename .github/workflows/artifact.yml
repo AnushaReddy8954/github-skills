@@ -33,12 +33,11 @@ jobs:
         with:
           name: my-repo-zip
           path: downloaded-repo
-
       - name: List extracted files
         run: |
           cd downloaded-repo
           echo "Here are all the files in the artifact:"
-          ls -laR
-      -name: Upload to S3
-      run: |
-            aws s3 cp ./to-upload s3://${{ githud-artifact-upload-s3 }}/${{ github.run_id }}/ --recursive
+          ls -laR  
+      - name: Upload to S3
+        run: |
+            aws s3 cp ./to-upload s3://githud-artifact-upload-s3/${{ github.run_id }}/ --recursive
