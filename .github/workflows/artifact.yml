@@ -41,7 +41,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4 
         with:
-          role-to-assume: github-IAMRole-assume-policy
+          role-to-assume: arn:aws:iam::116912494636:role/github-IAMRole-assume-policy
           aws-region: us-east-2
           role-session-name: gha-${{ github.run_id }}
       - name: Upload to S3
