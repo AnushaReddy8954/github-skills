@@ -2,17 +2,25 @@ name: Artifact Demo
 
 on:
   workflow_dispatch:
+permissions:
+  id-token: write
   
 jobs:
+
   create-artifact:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+       - name: Configure AWS Credentials
+         uses: aws-actions/configure-aws-credentials@main # Or a specific version
+         with:
+          role-to-assume: arn:aws:iam::116912494636:role/github-IAMRole-assume-policy
+          aws-region: us-east-2
+       - name: Checkout repository
+         uses: actions/checkout@v4
 
-      - name: Upload entire repo as artifact
-        uses: actions/upload-artifact@v4
-        with:
+       - name: Upload entire repo as artifact
+         uses: actions/upload-artifact@v4
+         with:
           name: my-repo-zip
           path: .
 
@@ -31,3 +39,6 @@ jobs:
           cd downloaded-repo
           echo "Here are all the files in the artifact:"
           ls -laR
+      -name: Upload to S3
+      run: |
+            aws s3 cp ./to-upload s3://${{ githud-artifact-upload-s3 }}/${{ github.run_id }}/ --recursive
