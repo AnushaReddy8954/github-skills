@@ -32,10 +32,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: my-repo-zip
-          path: downloaded-repo
+          path: repo.zip
       - name: List extracted files
         run: |
-          ls -la ${{ github.workspace }}/downloaded-repo
+          ls -la ${{ github.workspace }}
           pwd
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4 
@@ -45,4 +45,4 @@ jobs:
           role-session-name: gha-${{ github.run_id }}
       - name: Upload to S3
         run: |
-            aws s3 cp ${{ github.workspace }}/downloaded-repo/* s3://githud-artifact-upload-s3/${{ github.run_id }}/ --recursive
+            aws s3 cp ${{ github.workspace }}/repo.zip s3://githud-artifact-upload-s3/${{ github.run_id }}/ --recursive
