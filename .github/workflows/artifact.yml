@@ -38,7 +38,7 @@ jobs:
           ls -la ${{ github.workspace }}
           pwd
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4 
+        uses: aws-actions/configure-aws-credentials@v6 
         with:
           role-to-assume: arn:aws:iam::116912494636:role/github-IAMRole-assume-policy
           aws-region: us-east-2
